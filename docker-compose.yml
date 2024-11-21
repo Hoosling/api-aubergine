@@ -1,0 +1,16 @@
+services:
+  poc-auth-service:
+    build:
+      context: .
+      dockerfile: dockerfile.golang
+    working_dir: /src/presentation
+    volumes:
+      - ./.air.unx.toml:/.air.unx.toml
+      - ./src:/src
+    ports:
+      - "${API_PORT}:8080"
+    env_file: .env
+    environment:
+      GO111MODULE: ${GO111MODULE}
+      CGO_ENABLED: ${CGO_ENABLED}
+    restart: unless-stopped
